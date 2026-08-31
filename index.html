@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4 Elements - Chappies Battle</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;text-align:center;padding:20px}
+h1{color:#facc15}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:400px;margin:20px auto}
+.card{background:#1e293b;border-radius:16px;padding:20px;font-size:40px;cursor:pointer;border:3px solid transparent}
+.card:hover{border-color:#facc15}
+#result{font-size:22px;margin:20px;font-weight:bold;min-height:30px}
+.paypal{margin-top:30px;background:#ffc439;color:#000;padding:12px 20px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>🌍 4 ELEMENTS BATTLE</h1>
+<p>Chappies Wrapper vs Fire 🔥 Water 💧 Earth 🌍 Air 🌬️</p>
+<div id="score">You: 0 | Chappies: 0</div>
+<div id="result">Choose your element!</div>
+<div class="grid">
+<div class="card" onclick="play('fire')">🔥<span>FIRE</span></div>
+<div class="card" onclick="play('water')">💧<span>WATER</span></div>
+<div class="card" onclick="play('earth')">🌍<span>EARTH</span></div>
+<div class="card" onclick="play('air')">🌬️<span>AIR</span></div>
+</div>
+<a class="paypal" href="https://www.paypal.com/donate/?hosted_button_id=YOUR_ID" target="_blank">💛 Donate via PayPal</a>
+<script>
+let you=0, comp=0;
+const beats={fire:'air',air:'earth',earth:'water',water:'fire'};
+function play(user){
+ const elems=['fire','water','earth','air'];
+ const compChoice=elems[Math.floor(Math.random()*4)];
+ let msg=`You: ${user} vs Chappies: ${compChoice}<br>`;
+ if(user===compChoice)msg+='🤝 TIE!';
+ else if(beats[user]===compChoice){msg+='🔥 YOU WIN!';you++;}
+ else{msg+='😭 CHAPPIES WINS!';comp++;}
+ document.getElementById('result').innerHTML=msg;
+ document.getElementById('score').innerText=`You: ${you} | Chappies: ${comp}`;
+}
+</script>
+</body>
+</html>
