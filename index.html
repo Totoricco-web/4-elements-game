@@ -2,38 +2,91 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4 Elements Battle</title>
+<title>4 Elements Battle - Super Edition</title>
 <style>
-body{background:#111;color:white;font-family:Arial;text-align:center;padding:20px}
-button{padding:15px 25px;margin:10px;font-size:18px;border-radius:10px;border:none;cursor:pointer}
+body{background:#111;color:white;font-family:Arial;text-align:center;padding:15px;margin:0}
+button{padding:12px 20px;margin:6px;font-size:17px;border-radius:10px;border:none;cursor:pointer;font-weight:bold}
 .fire{background:#ff4444} .water{background:#4444ff;color:white} .earth{background:#44ff44} .air{background:#ffff44}
-#donate{background:#ffcc00;color:black;font-weight:bold;display:block;margin:20px auto;padding:15px 30px;text-decoration:none;border-radius:10px}
+#donate{background:#ffcc00;color:black;font-weight:bold;display:block;margin:15px auto;padding:15px 25px;text-decoration:none;border-radius:10px;max-width:300px}
+#game{max-width:400px;margin:0 auto}
+.level-bar{background:#333;height:10px;border-radius:5px;margin:10px 0}
+#levelFill{background:#00ff88;height:100%;width:20%;border-radius:5px;transition:0.5s}
+.leaderboard{background:#222;padding:10px;border-radius:10px;margin-top:15px;text-align:left}
 </style>
 </head>
 <body>
-<h1>🔥💧🌍💨 4 ELEMENTS BATTLE</h1>
-<h2 id="score">You: 0 | Chappies: 0</h2>
+<div id="game">
+<h1>🔥💧🌍💨 4 ELEMENTS</h1>
+<div>Level <span id="lvl">1</span>/5 - <span id="lvlName">Beginner</span></div>
+<div class="level-bar"><div id="levelFill"></div></div>
+<h2 id="score">You: 0 | Chappies: 0 | Wins to next level: 0/3</h2>
 <h2 id="result">Choose your element!</h2>
+
 <button class="fire" onclick="play('fire')">🔥 FIRE</button>
 <button class="water" onclick="play('water')">💧 WATER</button>
 <button class="earth" onclick="play('earth')">🌍 EARTH</button>
 <button class="air" onclick="play('air')">💨 AIR</button>
 
-<a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate via PayPal - Support Kananelo 💛</a>
-<p>Built by Kananelo in Sebokeng - Vereeniging, Gauteng</p>
+<a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate - Support Kananelo 💛</a>
+
+<div class="leaderboard">
+<h3>🏆 Leaderboard (This Phone)</h3>
+<div id="board">No scores yet - Play!</div>
+<button onclick="clearBoard()" style="background:#555;color:white;padding:5px 10px;font-size:12px">Clear Board</button>
+</div>
+
+<p style="font-size:12px;opacity:0.7">Built by Kananelo in Sebokeng - Vereeniging, Gauteng<br>V2.0 Super Edition</p>
+</div>
 
 <script>
-let you=0,chappies=0;
-function play(p){
-let e=['fire','water','earth','air'];
-let c=e[Math.floor(Math.random()*4)];
-let r='';
-if(p===c) r=`Draw! Both chose ${p}`;
-else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`You WIN! ${p} beats ${c}`;you++}
-else{r=`You LOSE! ${c} beats ${p}`;chappies++}
-document.getElementById('result').innerText=r+` (Chappies chose ${c})`;
-document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies}`;
+let you=0,chappies=0,wins=0,level=1;
+let levels=["Beginner","Fighter","Warrior","Master","GOD MODE"];
+let audioCtx;
+function sound(win){
+ try{
+  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  let o=audioCtx.createOscillator(), g=audioCtx.createGain();
+  o.connect(g); g.connect(audioCtx.destination);
+  o.frequency.value=win?880:200; o.type=win?'sine':'sawtooth';
+  g.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  o.start(); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.3); o.stop(audioCtx.currentTime+0.3);
+ }catch(e){}
 }
+function loadBoard(){
+ let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
+ let html='';
+ b.slice(0,5).forEach((s,i)=>{html+=`${i+1}. ${s.name} - Level ${s.level} (${s.score} wins) - ${s.date}<br>`});
+ document.getElementById('board').innerHTML=html||'No scores yet';
+}
+function saveScore(){
+ let name=prompt('NEW HIGH! Enter your name for leaderboard:','Kananelo')||'Player';
+ let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
+ b.push({name:name,level:level,score:you,date:new Date().toLocaleDateString()});
+ b.sort((a,b)=>b.level-b.level || b.score-a.score);
+ localStorage.setItem('elementsBoard',JSON.stringify(b.slice(0,10)));
+ loadBoard();
+}
+function clearBoard(){localStorage.removeItem('elementsBoard');loadBoard();}
+function play(p){
+ let e=['fire','water','earth','air'];
+ let c=e[Math.floor(Math.random()*4)];
+ if(level>=3 && Math.random()>0.6){
+   if(p==='fire') c='water'; else if(p==='water') c='earth'; else if(p==='earth') c='air'; else if(p==='air') c='fire';
+   if(Math.random()>0.5) c=e[Math.floor(Math.random()*4)];
+ }
+ let r='', win=false;
+ if(p===c) r=`Draw! Both chose ${p}`;
+ else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`You WIN! ${p} beats ${c}`;you++;wins++;win=true;sound(true)}
+ else{r=`You LOSE! ${c} beats ${p}`;chappies++;sound(false)}
+ document.getElementById('result').innerText=r+` (Chappies: ${c})`;
+ if(wins>=3 && level<5){level++;wins=0;alert('LEVEL UP! You are now Level '+level+' - '+levels[level-1]+' 🔥'); if(level===5) saveScore();}
+ if(you>=10 && you%5===0) saveScore();
+ document.getElementById('lvl').innerText=level;
+ document.getElementById('lvlName').innerText=levels[level-1];
+ document.getElementById('levelFill').style.width=(level*20)+'%';
+ document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies} | Wins to next: ${wins}/3`;
+}
+loadBoard();
 </script>
 </body>
 </html>
