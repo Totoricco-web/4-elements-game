@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4 Elements Battle - Super Edition</title>
+<title>4 Elements Battle - V3 Money Edition</title>
 <style>
 body{background:#111;color:white;font-family:Arial;text-align:center;padding:15px;margin:0}
 button{padding:12px 20px;margin:6px;font-size:17px;border-radius:10px;border:none;cursor:pointer;font-weight:bold}
@@ -12,14 +12,27 @@ button{padding:12px 20px;margin:6px;font-size:17px;border-radius:10px;border:non
 .level-bar{background:#333;height:10px;border-radius:5px;margin:10px 0}
 #levelFill{background:#00ff88;height:100%;width:20%;border-radius:5px;transition:0.5s}
 .leaderboard{background:#222;padding:10px;border-radius:10px;margin-top:15px;text-align:left}
+.ad-box{background:#1a1a1a;border:1px dashed #555;padding:15px;margin:10px 0;border-radius:8px;font-size:13px;color:#888}
+.ad-box b{color:#ffcc00}
 </style>
+<!-- GOOGLE ADSENSE - Replace ca-pub-XXXX with your own ID after approval -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="game">
+
+<div class="ad-box">
+<b>Advertisement</b><br>
+<!-- AD 1 - TOP BANNER -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<small>Support me by viewing ads 💛</small>
+</div>
+
 <h1>🔥💧🌍💨 4 ELEMENTS</h1>
 <div>Level <span id="lvl">1</span>/5 - <span id="lvlName">Beginner</span></div>
 <div class="level-bar"><div id="levelFill"></div></div>
-<h2 id="score">You: 0 | Chappies: 0 | Wins to next level: 0/3</h2>
+<h2 id="score">You: 0 | Chappies: 0 | Wins to next: 0/3</h2>
 <h2 id="result">Choose your element!</h2>
 
 <button class="fire" onclick="play('fire')">🔥 FIRE</button>
@@ -27,19 +40,28 @@ button{padding:12px 20px;margin:6px;font-size:17px;border-radius:10px;border:non
 <button class="earth" onclick="play('earth')">🌍 EARTH</button>
 <button class="air" onclick="play('air')">💨 AIR</button>
 
-<a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate - Support Kananelo 💛</a>
+<a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate R10 - Support Kananelo 💛</a>
 
-<div class="leaderboard">
-<h3>🏆 Leaderboard (This Phone)</h3>
-<div id="board">No scores yet - Play!</div>
-<button onclick="clearBoard()" style="background:#555;color:white;padding:5px 10px;font-size:12px">Clear Board</button>
+<button onclick="supportAd()" style="background:#00ff88;color:black;width:100%;max-width:300px">📺 Click to Support Me (View Ad)</button>
+
+<div class="ad-box">
+<b>Advertisement</b><br>
+<!-- AD 2 - BOTTOM BANNER -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
 
-<p style="font-size:12px;opacity:0.7">Built by Kananelo in Sebokeng - Vereeniging, Gauteng<br>V2.0 Super Edition</p>
+<div class="leaderboard">
+<h3>🏆 Leaderboard</h3>
+<div id="board">No scores yet</div>
+<button onclick="clearBoard()" style="background:#555;color:white;padding:5px 10px;font-size:12px">Clear</button>
+</div>
+
+<p style="font-size:12px;opacity:0.7">Built by Kananelo - Sebokeng - V3 Money Edition<br>Ads = Support my dream!</p>
 </div>
 
 <script>
-let you=0,chappies=0,wins=0,level=1;
+let you=0,chappies=0,wins=0,level=1,adClicks=0;
 let levels=["Beginner","Fighter","Warrior","Master","GOD MODE"];
 let audioCtx;
 function sound(win){
@@ -52,39 +74,30 @@ function sound(win){
   o.start(); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.3); o.stop(audioCtx.currentTime+0.3);
  }catch(e){}
 }
+function supportAd(){adClicks++;alert('Thank you for supporting me! 🙏 You supported '+adClicks+' times. Real ads will pay me per view soon!');window.open('https://paypal.me/KMphuthi','_blank');}
 function loadBoard(){
  let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
- let html='';
- b.slice(0,5).forEach((s,i)=>{html+=`${i+1}. ${s.name} - Level ${s.level} (${s.score} wins) - ${s.date}<br>`});
+ let html=''; b.slice(0,5).forEach((s,i)=>{html+=`${i+1}. ${s.name} - Lvl ${s.level} (${s.score} wins)<br>`});
  document.getElementById('board').innerHTML=html||'No scores yet';
 }
 function saveScore(){
- let name=prompt('NEW HIGH! Enter your name for leaderboard:','Kananelo')||'Player';
+ let name=prompt('NEW HIGH! Enter name:','Kananelo')||'Player';
  let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
- b.push({name:name,level:level,score:you,date:new Date().toLocaleDateString()});
- b.sort((a,b)=>b.level-b.level || b.score-a.score);
- localStorage.setItem('elementsBoard',JSON.stringify(b.slice(0,10)));
- loadBoard();
+ b.push({name:name,level:level,score:you}); b.sort((a,b)=>b.level-a.level||b.score-a.score);
+ localStorage.setItem('elementsBoard',JSON.stringify(b.slice(0,10))); loadBoard();
 }
 function clearBoard(){localStorage.removeItem('elementsBoard');loadBoard();}
 function play(p){
- let e=['fire','water','earth','air'];
- let c=e[Math.floor(Math.random()*4)];
- if(level>=3 && Math.random()>0.6){
-   if(p==='fire') c='water'; else if(p==='water') c='earth'; else if(p==='earth') c='air'; else if(p==='air') c='fire';
-   if(Math.random()>0.5) c=e[Math.floor(Math.random()*4)];
- }
+ let e=['fire','water','earth','air']; let c=e[Math.floor(Math.random()*4)];
+ if(level>=3 && Math.random()>0.6){ if(p==='fire') c='water'; else if(p==='water') c='earth'; else if(p==='earth') c='air'; else if(p==='air') c='fire'; if(Math.random()>0.5) c=e[Math.floor(Math.random()*4)];}
  let r='', win=false;
- if(p===c) r=`Draw! Both chose ${p}`;
- else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`You WIN! ${p} beats ${c}`;you++;wins++;win=true;sound(true)}
- else{r=`You LOSE! ${c} beats ${p}`;chappies++;sound(false)}
- document.getElementById('result').innerText=r+` (Chappies: ${c})`;
- if(wins>=3 && level<5){level++;wins=0;alert('LEVEL UP! You are now Level '+level+' - '+levels[level-1]+' 🔥'); if(level===5) saveScore();}
+ if(p===c) r=`Draw! Both ${p}`; else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`WIN! ${p} beats ${c}`;you++;wins++;win=true;sound(true)} else{r=`LOSE! ${c} beats ${p}`;chappies++;sound(false)}
+ document.getElementById('result').innerText=r+` (${c})`;
+ if(wins>=3 && level<5){level++;wins=0;alert('LEVEL UP! Level '+level+' - '+levels[level-1]); if(level===5) saveScore();}
  if(you>=10 && you%5===0) saveScore();
- document.getElementById('lvl').innerText=level;
- document.getElementById('lvlName').innerText=levels[level-1];
+ document.getElementById('lvl').innerText=level; document.getElementById('lvlName').innerText=levels[level-1];
  document.getElementById('levelFill').style.width=(level*20)+'%';
- document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies} | Wins to next: ${wins}/3`;
+ document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies} | To next: ${wins}/3 | Support clicks: ${adClicks}`;
 }
 loadBoard();
 </script>
