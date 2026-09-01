@@ -1,108 +1,21 @@
+// VAAL TO WORLD - ADS EVERY 2 GAMES
+let gamesPlayed = localStorage.getItem('vaal_games') || 0;
+gamesPlayed = parseInt(gamesPlayed);
 
+function gameOver() {
+  gamesPlayed++;
+  localStorage.setItem('vaal_games', gamesPlayed);
 
-
- <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>4 Elements of Earth - 1000 Stages</title>
-<style>
-body{margin:0;background:radial-gradient(circle at center,#2a1a4a,#0d0a1a);color:white;font-family:Arial;overflow:hidden}
-#wrap{max-width:420px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
-.top{background:linear-gradient(#4a3720,#2a1f10);border:3px solid #8a6a3a;border-radius:15px;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin:8px;box-shadow:0 0 15px gold}
-.score{background:#111;border:2px solid #666;border-radius:8px;padding:4px 10px;text-align:center;min-width:66px}
-.score b{display:block;font-size:20px;color:#ffd700}
-.title{background:radial-gradient(#ffd700,#ff8c00);color:#4a2000;padding:5px 10px;border-radius:20px;font-weight:900;border:3px solid #8a5a00;text-align:center;font-size:13px;line-height:1.1}
-.area{flex:1;background:radial-gradient(circle at top,#3a2a6a,#1a1030);margin:0 8px;border:4px solid #8a6a3a;border-radius:15px;padding:12px 8px;position:relative;min-height:380px}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:18px}
-.gem{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,0.8),0 3px 6px black;border:2px solid rgba(255,255,255,0.3);transition:0.15s;user-select:none}
-.gem.sel{transform:scale(0.8);outline:3px solid yellow;box-shadow:0 0 20px yellow}
-.gem.fire{background:radial-gradient(circle at 30% 30%,#ffcccc,#ff2222,#880000)}
-.gem.water{background:radial-gradient(circle at 30% 30%,#ccffff,#2299ff,#0033aa)}
-.gem.earth{background:radial-gradient(circle at 30% 30%,#ccffcc,#22ff22,#006600)}
-.gem.air{background:radial-gradient(circle at 30% 30%,#ffffcc,#ffdd22,#aa6600)}
-.gem.pop{animation:pop 0.3s forwards}
-@keyframes pop{50%{transform:scale(1.4)}100%{transform:scale(0)}}
-.timer{height:14px;background:#111;border-radius:10px;margin:8px;overflow:hidden;border:2px solid #666}
-.fill{height:100%;width:100%;transition:width 0.5s linear}
-.bar{background:#111;margin:4px 8px;padding:6px 10px;border-radius:10px;border:1px solid #555;display:flex;justify-content:space-between;font-size:11px}
-.nav{background:linear-gradient(#4a3720,#1a1000);border:3px solid #8a6a3a;border-radius:15px;display:flex;justify-content:space-around;padding:8px;margin:8px}
-.btn{background:radial-gradient(#5a4a2a,#2a1f10);border:2px solid #8a6a3a;border-radius:12px;padding:6px 12px;font-size:20px}
-.ad{background:white;color:black;display:flex;align-items:center;justify-content:space-between;padding:8px 12px}
-.ad button{background:#0066ff;color:white;border:none;padding:8px 18px;border-radius:20px;font-weight:bold}
-</style>
-</head>
-<body>
-<div id="wrap">
-<div class="top">
-<div class="score">SCORE<br><b id="sc">0</b></div>
-<div class="title">4 ELEMENTS<br>OF EARTH<br><span style="font-size:9px;background:#222;color:gold;padding:2px 6px;border-radius:8px">STAGE <span id="st">1</span>/1000</span></div>
-<div class="score">COMBO<br><b id="cb">x1</b></div>
-</div>
-<div class="bar"><span id="goal">🎯 200 pts</span><span id="prog">⭐ 0/200</span><span id="elem">🌍🔥💧💨</span></div>
-<div class="area"><div class="grid" id="grid"></div><p id="hint" style="text-align:center;font-size:11px;color:#aaffaa;margin:8px 0 0">Stage 1: Learn the 4 Elements!</p></div>
-<div class="timer"><div class="fill" id="fill" style="background:linear-gradient(90deg,#00ff88,#ffff00)"></div></div>
-<div class="nav">
-<div class="btn" onclick="showStages()">📖</div>
-<div class="btn" onclick="alert('🏆 Stage: '+stage+'/'+1000+'\nScore: '+score+'\nBest: '+localStorage.getItem('earthBest'))">🏆</div>
-<div class="btn" style="background:gold;color:black" onclick="location.reload()">🏠</div>
-<div class="btn" onclick="if(confirm('Reset to Stage 1?')){localStorage.setItem('earthStage','1');location.reload()}">🌍</div>
-<div class="btn" onclick="window.open('https://paypal.me/KMphuthi','_blank')">🎁</div>
-</div>
-<div class="ad"><div style="display:flex;align-items:center;gap:8px"><div style="background:black;color:#00ff88;padding:5px 7px;border-radius:6px;font-weight:900;font-size:11px">4<br>ELEM</div><div><b>4 Elements of Earth • Vaal</b><br><small>50 Stages + Infinity to 1000</small></div></div><button onclick="window.open('https://paypal.me/KMphuthi','_blank')">PLAY</button></div>
-<a href="https://paypal.me/KMphuthi" target="_blank" style="text-align:center;color:gold;display:block;padding:8px;text-decoration:none;font-weight:bold;background:#111;margin:6px 8px;border-radius:10px;border:1px solid gold">💛 Donate R10 - Vaal Made 💛</a>
-</div>
-<script>
-const TYPES=['fire','water','earth','air']; const EMO={fire:'🔥',water:'💧',earth:'🌍',air:'💨'};
-const NAMES={fire:'Fire',water:'Water',earth:'Earth',air:'Air'};
-const FIXED=[
-[200,30,'Learn the 4 Elements!'],[250,30,'Fire is hot! 🔥'],[300,30,'Water flows! 💧'],[350,28,'Earth is strong! 🌍'],[400,28,'Air is fast! 💨'],
-[500,26,'Collect all 4!'],[600,26,'Fire power!'],[700,25,'Water power!'],[800,25,'Earth power!'],[1000,24,'Air power! BOSS'],
-[1100,24,'2 elements mix!'],[1200,23,'Fire + Water'],[1300,23,'Earth + Air'],[1400,22,'Vaal River! 💧'],[1500,22,'Vaal Steel! 🔥'],
-[1600,21,'Vaal Soil! 🌍'],[1700,21,'Vaal Sky! 💨'],[1800,20,'4 Elements Unite!'],[1900,20,'Next is boss!'],[2200,20,'20 BOSS! 🌋'],
-[2300,19,'Lava! 🔥🌍'],[2400,19,'Storm! 💧💨'],[2500,18,'Mud! 💧🌍'],[2600,18,'Smoke! 🔥💨'],[3000,18,'GOLD! 25!'],
-[3200,17,'Volcano!'],[3400,17,'Tsunami!'],[3600,16,'Earthquake!'],[3800,16,'Tornado!'],[4200,15,'DIAMOND 30! 💎'],
-[4400,15,'Magma!'],[4600,14,'Ocean!'],[4800,14,'Mountain!'],[5000,14,'Hurricane!'],[5500,13,'Avatar! Master 4!'],
-[6000,13,'Bending!'],[6500,12,'Elemental!'],[7000,12,'Planet Earth!'],[8000,12,'Moon!'],[9000,11,'RUBY 40! 🔴'],
-[9500,11,'Sun! 🔥'],[10000,10,'Sea! 💧'],[11000,10,'Forest! 🌍'],[12000,10,'Sky! 💨'],[13000,9,'Universe!'],
-[14000,9,'Big Bang!'],[15000,9,'Creation!'],[16000,8,'Mother Earth!'],[18000,8,'49! Almost!'],[20000,8,'50 BOSS! GOD! 💎🔥💧🌍💨']
-];
-let stage=parseInt(localStorage.getItem('earthStage')||'1'); let grid=[],score=0,combo=1,time=30,maxTime=30,sel=null,tInt=null;
-const ctx=new(window.AudioContext||window.webkitAudioContext)();
-function beep(f){try{let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;o.connect(g);g.connect(ctx.destination);g.gain.value=0.18;o.start();g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.22);o.stop(ctx.currentTime+0.22)}catch(e){}}
-function getLevel(n){if(n<=50){let d=FIXED[n-1]; return {goal:d[0],time:d[1],msg:d[2]}} else {return {goal:20000+(n-50)*500,time:Math.max(5,8-Math.floor((n-50)/100)),msg:'INFINITY Stage '+n+' — Vaal Legend! ♾️'}}}
-function init(){
- let L=getLevel(stage); grid=[]; document.getElementById('grid').innerHTML=''; sel=null; time=L.time; maxTime=L.time; score=0; combo=1;
- document.getElementById('st').innerText=stage; document.getElementById('goal').innerText='🎯 '+L.goal; document.getElementById('hint').innerText='Stage '+stage+': '+L.msg;
- for(let i=0;i<49;i++){let t=TYPES[Math.floor(Math.random()*4)]; grid.push(t); let d=document.createElement('div'); d.className='gem '+t; d.innerText=EMO[t]; d.dataset.i=i; d.onclick=()=>pick(i); document.getElementById('grid').appendChild(d);}
- update(); startTimer(); check(false);
+  if (gamesPlayed % 2 === 0) {
+    // SHOW AD EVERY 2 GAMES
+    showVaalAd();
+  }
 }
-function pick(i){let c=document.querySelectorAll('.gem'); if(sel===null){sel=i; c[i].classList.add('sel');} else {let a=sel,b=i; c[a].classList.remove('sel'); sel=null; if(a===b)return; let ok=Math.abs(a-b)===1&&Math.floor(a/7)===Math.floor(b/7)||Math.abs(a-b)===7; if(ok)swap(a,b);}}
-function swap(a,b){let t=grid[a];grid[a]=grid[b];grid[b]=t; let c=document.querySelectorAll('.gem'); c[a].className='gem '+grid[a]; c[a].innerText=EMO[grid[a]]; c[b].className='gem '+grid[b]; c[b].innerText=EMO[grid[b]]; setTimeout(()=>check(true),100);}
-function check(anim){
- let rm=new Set(); for(let r=0;r<7;r++) for(let c=0;c<5;c++){let i=r*7+c; if(grid[i]&&grid[i]===grid[i+1]&&grid[i]===grid[i+2]){rm.add(i);rm.add(i+1);rm.add(i+2);}}
- for(let c=0;c<7;c++) for(let r=0;r<5;r++){let i=r*7+c; if(grid[i]&&grid[i]===grid[i+7]&&grid[i]===grid[i+14]){rm.add(i);rm.add(i+7);rm.add(i+14);}}
- if(rm.size>0){
-  score+=rm.size*10*combo; beep(600+combo*50); if(anim)rm.forEach(i=>document.querySelectorAll('.gem')[i].classList.add('pop'));
-  setTimeout(()=>{
-   rm.forEach(i=>grid[i]=null);
-   for(let c=0;c<7;c++){let col=[]; for(let r=6;r>=0;r--){let i=r*7+c; if(grid[i])col.push(grid[i]);} for(let r=6;r>=0;r--){let i=r*7+c; grid[i]=col[6-r]||TYPES[Math.floor(Math.random()*4)];}}
-   document.querySelectorAll('.gem').forEach((el,i)=>{el.className='gem '+grid[i]; el.innerText=EMO[grid[i]];}); combo++; update();
-   let L=getLevel(stage); if(score>=L.goal){
-    clearInterval(tInt); let best=parseInt(localStorage.getItem('earthBest')||0); if(score>best)localStorage.setItem('earthBest',score);
-    setTimeout(()=>{
-     if(stage>=1000){alert('♾️ VAAL GOD! 1000 STAGES CLEARED! ♾️\nYOU MASTERED EARTH! 🌍🔥💧💨\nScore: '+score); stage=1;}
-     else {if(stage===50)alert('💎 50 STAGES CLEARED! NOW INFINITY TO 1000! ♾️\nStage 51 starts now!'); else alert('Stage '+stage+' CLEARED! 🎉\n'+L.msg+'\nScore: '+score); stage++; localStorage.setItem('earthStage',stage);}
-     init();
-    },400);
-   } else check(true);
-  },anim?280:0);
- } else {combo=1; update();}
+
+function showVaalAd() {
+  // If you have AdMob ID, ad shows here
+  alert("🔥 VAAL AD — Support Vaal Dev! 🌍\n\n[Your Ad Will Show Here]\n\nThanks for supporting VAAL TO WORLD!");
+  
+  // For real AdMob, replace with:
+  // admob.interstitial.show();
 }
-function update(){let L=getLevel(stage); document.getElementById('sc').innerText=score; document.getElementById('cb').innerText='x'+combo; document.getElementById('prog').innerText='⭐ '+score+'/'+L.goal; document.getElementById('fill').style.width=(time/maxTime*100)+'%'; document.getElementById('fill').style.background=time<8?'linear-gradient(90deg,red,orange)':time<12?'linear-gradient(90deg,orange,yellow)':'linear-gradient(90deg,#00ff88,#ffff00)';}
-function startTimer(){clearInterval(tInt); tInt=setInterval(()=>{time--; update(); if(time<=0){clearInterval(tInt); alert('⏰ Stage '+stage+' Failed! '+score+'/'+getLevel(stage).goal+'\nTry again Earth Bender! 🌍');}},1000);}
-function showStages(){let s='🌍 4 ELEMENTS OF EARTH — 1000 STAGES 🌍\n\n'; for(let i=1;i<=Math.min(stage+5,50);i++){let L=getLevel(i); s+=(i===stage?'👉 ':' ')+'Stage '+i+': '+L.goal+' pts - '+L.msg+(i<stage?' ✅':'')+'\n';} if(stage>=50) s+='\n♾️ INFINITY MODE:\nStage 51-1000: 20500 to 500k pts\nTime gets faster!\n'; s+='\nYou are Stage '+stage+'/1000\nVaal Made! 🔥💧🌍💨'; alert(s);}
-init();
-</script>
-</body>
-</html>
