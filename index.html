@@ -1,105 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4 Elements Battle - V3 Money Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Elements Crush - Candy Edition</title>
 <style>
-body{background:#111;color:white;font-family:Arial;text-align:center;padding:15px;margin:0}
-button{padding:12px 20px;margin:6px;font-size:17px;border-radius:10px;border:none;cursor:pointer;font-weight:bold}
-.fire{background:#ff4444} .water{background:#4444ff;color:white} .earth{background:#44ff44} .air{background:#ffff44}
-#donate{background:#ffcc00;color:black;font-weight:bold;display:block;margin:15px auto;padding:15px 25px;text-decoration:none;border-radius:10px;max-width:300px}
-#game{max-width:400px;margin:0 auto}
-.level-bar{background:#333;height:10px;border-radius:5px;margin:10px 0}
-#levelFill{background:#00ff88;height:100%;width:20%;border-radius:5px;transition:0.5s}
-.leaderboard{background:#222;padding:10px;border-radius:10px;margin-top:15px;text-align:left}
-.ad-box{background:#1a1a1a;border:1px dashed #555;padding:15px;margin:10px 0;border-radius:8px;font-size:13px;color:#888}
-.ad-box b{color:#ffcc00}
+body{background:#111;color:white;font-family:Arial;text-align:center;margin:0;padding:10px;touch-action:none}
+#game{max-width:380px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:#222;padding:8px;border-radius:12px;margin:10px 0}
+.cell{aspect-ratio:1;background:#333;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;user-select:none;transition:0.2s}
+.cell.selected{transform:scale(0.8);border:2px solid yellow}
+.cell.pop{animation:pop 0.3s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(0)}}
+.top{display:flex;justify-content:space-between;background:#222;padding:10px;border-radius:10px}
+#donate{background:#ffcc00;color:black;display:block;margin:10px auto;padding:12px;text-decoration:none;border-radius:10px;font-weight:bold;max-width:300px}
+.ad-box{background:#1a1a1a;border:1px dashed #555;padding:10px;margin:10px 0;border-radius:8px;font-size:12px;color:#888}
+button{padding:10px 18px;margin:5px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.fire{background:#ff4444}.water{background:#4444ff;color:white}.earth{background:#44ff44}.air{background:#ffff44}
 </style>
-<!-- GOOGLE ADSENSE - Replace ca-pub-XXXX with your own ID after approval -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="game">
-
-<div class="ad-box">
-<b>Advertisement</b><br>
-<!-- AD 1 - TOP BANNER -->
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-<small>Support me by viewing ads 💛</small>
+<h1>🍭 ELEMENTS CRUSH</h1>
+<div class="top">
+<div>Score: <b id="score">0</b></div>
+<div>Target: <b id="target">100</b></div>
+<div>Moves: <b id="moves">20</b></div>
 </div>
+<div>Level <span id="lvl">1</span>/10 - <span id="lvlName">Beginner</span></div>
 
-<h1>🔥💧🌍💨 4 ELEMENTS</h1>
-<div>Level <span id="lvl">1</span>/5 - <span id="lvlName">Beginner</span></div>
-<div class="level-bar"><div id="levelFill"></div></div>
-<h2 id="score">You: 0 | Chappies: 0 | Wins to next: 0/3</h2>
-<h2 id="result">Choose your element!</h2>
+<div class="ad-box"><b>Advertisement</b><br><small>Support me by playing 💛</small></div>
 
-<button class="fire" onclick="play('fire')">🔥 FIRE</button>
-<button class="water" onclick="play('water')">💧 WATER</button>
-<button class="earth" onclick="play('earth')">🌍 EARTH</button>
-<button class="air" onclick="play('air')">💨 AIR</button>
+<div class="grid" id="grid"></div>
+
+<p id="msg">Swipe 2 elements to match 3! 🔥💧🌍💨</p>
 
 <a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate R10 - Support Kananelo 💛</a>
+<button onclick="location.reload()" style="background:#00ff88;color:black;width:100%;max-width:300px">🔄 Restart</button>
+<button onclick="window.open('https://paypal.me/KMphuthi','_blank')" style="background:#ff44ff;color:white;width:100%;max-width:300px">📺 Click Ad to Support</button>
 
-<button onclick="supportAd()" style="background:#00ff88;color:black;width:100%;max-width:300px">📺 Click to Support Me (View Ad)</button>
-
-<div class="ad-box">
-<b>Advertisement</b><br>
-<!-- AD 2 - BOTTOM BANNER -->
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto"></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-</div>
-
-<div class="leaderboard">
-<h3>🏆 Leaderboard</h3>
-<div id="board">No scores yet</div>
-<button onclick="clearBoard()" style="background:#555;color:white;padding:5px 10px;font-size:12px">Clear</button>
-</div>
-
-<p style="font-size:12px;opacity:0.7">Built by Kananelo - Sebokeng - V3 Money Edition<br>Ads = Support my dream!</p>
+<div class="ad-box"><b>Advertisement</b></div>
+<p style="font-size:11px;opacity:0.6">Made in Sebokeng by Kananelo - Candy Edition V4</p>
 </div>
 
 <script>
-let you=0,chappies=0,wins=0,level=1,adClicks=0;
-let levels=["Beginner","Fighter","Warrior","Master","GOD MODE"];
-let audioCtx;
-function sound(win){
- try{
-  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  let o=audioCtx.createOscillator(), g=audioCtx.createGain();
-  o.connect(g); g.connect(audioCtx.destination);
-  o.frequency.value=win?880:200; o.type=win?'sine':'sawtooth';
-  g.gain.setValueAtTime(0.3, audioCtx.currentTime);
-  o.start(); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.3); o.stop(audioCtx.currentTime+0.3);
- }catch(e){}
+const EMO=['🔥','💧','🌍','💨'];
+let grid=[], score=0, target=100, moves=20, level=1, selected=null;
+let levels=["Beginner","Sweet","Tasty","Crispy","Spicy","Fiery","Stormy","Earthy","Master","GOD CRUSH"];
+function init(){
+ grid=[]; document.getElementById('grid').innerHTML='';
+ for(let i=0;i<36;i++){
+  let c=EMO[Math.floor(Math.random()*4)];
+  grid.push(c);
+  let d=document.createElement('div'); d.className='cell'; d.innerText=c; d.dataset.i=i;
+  d.onclick=()=>clickCell(i);
+  document.getElementById('grid').appendChild(d);
+ }
+ updateUI(); checkMatches(false);
 }
-function supportAd(){adClicks++;alert('Thank you for supporting me! 🙏 You supported '+adClicks+' times. Real ads will pay me per view soon!');window.open('https://paypal.me/KMphuthi','_blank');}
-function loadBoard(){
- let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
- let html=''; b.slice(0,5).forEach((s,i)=>{html+=`${i+1}. ${s.name} - Lvl ${s.level} (${s.score} wins)<br>`});
- document.getElementById('board').innerHTML=html||'No scores yet';
+function clickCell(i){
+ if(selected===null){selected=i; document.querySelectorAll('.cell')[i].classList.add('selected');}
+ else{
+  if(Math.abs(selected-i)===1 || Math.abs(selected-i)===6){ swap(selected,i); moves--; if(moves<=0) gameOver(false);}
+  document.querySelectorAll('.cell')[selected].classList.remove('selected'); selected=null; updateUI();
+ }
 }
-function saveScore(){
- let name=prompt('NEW HIGH! Enter name:','Kananelo')||'Player';
- let b=JSON.parse(localStorage.getItem('elementsBoard')||'[]');
- b.push({name:name,level:level,score:you}); b.sort((a,b)=>b.level-a.level||b.score-a.score);
- localStorage.setItem('elementsBoard',JSON.stringify(b.slice(0,10))); loadBoard();
+function swap(a,b){
+ let tmp=grid[a]; grid[a]=grid[b]; grid[b]=tmp;
+ let cells=document.querySelectorAll('.cell');
+ cells[a].innerText=grid[a]; cells[b].innerText=grid[b];
+ setTimeout(()=>checkMatches(true),200);
 }
-function clearBoard(){localStorage.removeItem('elementsBoard');loadBoard();}
-function play(p){
- let e=['fire','water','earth','air']; let c=e[Math.floor(Math.random()*4)];
- if(level>=3 && Math.random()>0.6){ if(p==='fire') c='water'; else if(p==='water') c='earth'; else if(p==='earth') c='air'; else if(p==='air') c='fire'; if(Math.random()>0.5) c=e[Math.floor(Math.random()*4)];}
- let r='', win=false;
- if(p===c) r=`Draw! Both ${p}`; else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`WIN! ${p} beats ${c}`;you++;wins++;win=true;sound(true)} else{r=`LOSE! ${c} beats ${p}`;chappies++;sound(false)}
- document.getElementById('result').innerText=r+` (${c})`;
- if(wins>=3 && level<5){level++;wins=0;alert('LEVEL UP! Level '+level+' - '+levels[level-1]); if(level===5) saveScore();}
- if(you>=10 && you%5===0) saveScore();
- document.getElementById('lvl').innerText=level; document.getElementById('lvlName').innerText=levels[level-1];
- document.getElementById('levelFill').style.width=(level*20)+'%';
- document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies} | To next: ${wins}/3 | Support clicks: ${adClicks}`;
+function checkMatches(animate){
+ let toRemove=new Set();
+ for(let r=0;r<6;r++) for(let c=0;c<4;c++){ let i=r*6+c; if(grid[i]&&grid[i]===grid[i+1]&&grid[i]===grid[i+2]){toRemove.add(i);toRemove.add(i+1);toRemove.add(i+2);} }
+ for(let c=0;c<6;c++) for(let r=0;r<4;r++){ let i=r*6+c; if(grid[i]&&grid[i]===grid[i+6]&&grid[i]===grid[i+12]){toRemove.add(i);toRemove.add(i+6);toRemove.add(i+12);} }
+ if(toRemove.size>0){
+  score+=toRemove.size*10; if(animate){toRemove.forEach(i=>document.querySelectorAll('.cell')[i].classList.add('pop'));}
+  setTimeout(()=>{
+   toRemove.forEach(i=>{grid[i]=null});
+   // gravity
+   for(let c=0;c<6;c++){ let col=[]; for(let r=5;r>=0;r--){ let i=r*6+c; if(grid[i]) col.push(grid[i]); } for(let r=5;r>=0;r--){ let i=r*6+c; grid[i]=col[5-r]||EMO[Math.floor(Math.random()*4)]; } }
+   document.querySelectorAll('.cell').forEach((el,i)=>{el.innerText=grid[i]; el.classList.remove('pop');});
+   updateUI(); if(score>=target) levelUp(); else checkMatches(true);
+  }, animate?300:0);
+ }
 }
-loadBoard();
+function updateUI(){
+ document.getElementById('score').innerText=score;
+ document.getElementById('target').innerText=target;
+ document.getElementById('moves').innerText=moves;
+ document.getElementById('lvl').innerText=level;
+ document.getElementById('lvlName').innerText=levels[level-1];
+ document.getElementById('msg').innerText=moves<=5?`⚠️ Only ${moves} moves left!`:`Match 3 ${EMO.join(' ')}`;
+}
+function levelUp(){
+ if(level>=10){ gameOver(true); return; }
+ alert(`LEVEL ${level} CLEARED! 🎉 Score ${score}`);
+ level++; target+=100; moves+=5; score=0; init();
+}
+function gameOver(win){
+ if(win){alert(`YOU ARE GOD OF CRUSH! 🏆 Final score ${score}`); window.open('https://paypal.me/KMphuthi','_blank');}
+ else{alert(`Game Over! Score ${score}. Donate to try again? 💛`);}
+}
+init();
 </script>
 </body>
 </html>
