@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,3 +45,4 @@ function closeAd(){document.getElementById('adModal').style.display='none';init(
 function showHint(){let unm=cells.filter(c=>!c.classList.contains('matched'));for(let type=0;type<4;type++){let same=unm.filter(c=>c.dataset.type==type);if(same.length>=3){same.slice(0,3).forEach(c=>{c.style.boxShadow='0 0 15px #00ff88';setTimeout(()=>c.style.boxShadow='',1000)});return;}}alert('No triple left - Reset!');}
 stage=parseInt(localStorage.getItem('vaalStage')||'1');games=parseInt(localStorage.getItem('vaalGames')||'0');init();
 </script></body></html>
+ 
