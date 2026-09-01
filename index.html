@@ -1,175 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4 Elements of Earth - VAAL TO WORLD</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0f0f0f;color:#fff;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:10px}
-h1{background:linear-gradient(90deg,#ff6a00,#ee0979,#00f2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:28px;margin:10px 0;text-align:center}
-#brand{color:#00ff88;font-size:12px;letter-spacing:2px;margin-bottom:10px}
-#stats{display:flex;gap:15px;margin:10px;font-size:14px}
-#board{display:grid;grid-template-columns:repeat(4,70px);gap:8px;margin:15px 0}
-.cell{width:70px;height:70px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;border:2px solid #333;transition:0.2s}
-.cell:active{transform:scale(0.9)}
-.fire{background:#ff3d0033;border-color:#ff3d00}
-.water{background:#0091ff33;border-color:#0091ff}
-.earth{background:#4caf5033;border-color:#4caf50}
-.air{background:#ffffff22;border-color:#fff}
-.selected{border-color:yellow!important;box-shadow:0 0 15px yellow;transform:scale(1.1)}
-#target{font-size:20px;margin:10px;padding:10px 20px;background:#222;border-radius:20px}
-button{padding:12px 25px;border:none;border-radius:25px;background:linear-gradient(90deg,#ff6a00,#ee0979);color:#fff;font-weight:bold;font-size:16px;cursor:pointer;margin:5px}
-#adBox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000ee;z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-#footer{margin-top:auto;padding:15px;font-size:11px;color:#888;text-align:center}
-</style>
-</head>
-<body>
-<h1>4 ELEMENTS OF EARTH</h1>
-<div id="brand">VAAL TO WORLD 🌍 • MADE IN VAAL, FOR THE WORLD</div>
-<div id="stats">
-<span id="stage">Stage: 1 / 1000</span>
-<span id="time">Time: 30s</span>
-<span id="games">Games: 0</span>
-</div>
-<div id="target">Match: 🔥 FIRE x3</div>
-<div id="board"></div>
-<div>
-<button onclick="useHint()">Hint (Ad)</button>
-<button onclick="resetGame()">Reset</button>
-</div>
-<div id="footer">
-VAAL TO WORLD • Free Game - Ad every 2 games supports dev ❤️<br>
-Donate: PayPal.me/KMphuthi | Totor.github.io/4-elements-game
-</div>
-
-<div id="adBox">
-<h2 style="font-size:30px">🔥 VAAL AD 🌍</h2>
-<p style="margin:20px 0;font-size:18px">Thanks for playing 2 games!<br>Ad supports VAAL TO WORLD dev<br><br>[Your AdMob Ad Will Show Here]</p>
-<p style="color:#0f0">You earn R5 for dev when ad shows!</p>
-<button onclick="closeAd()" style="margin-top:20px">Continue Playing ❤️</button>
-<div style="margin-top:15px;font-size:12px;color:#888">Donate: PayPal.me/KMphuthi</div>
-</div>
-
+ <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>4 Elements - VAAL TO WORLD</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#111;color:#fff;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:10px}h1{background:linear-gradient(90deg,#ff6a00,#ee0979,#00f2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:26px;margin:8px 0}#brand{color:#0f8;font-size:11px;letter-spacing:2px;margin-bottom:8px}#stats{display:flex;gap:12px;font-size:13px;margin:6px}#board{display:grid;grid-template-columns:repeat(4,68px);gap:7px;margin:12px 0}.cell{width:68px;height:68px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;border:2px solid #333}.selected{border-color:yellow!important;box-shadow:0 0 12px yellow;transform:scale(1.08)}.fire{background:#ff3d0033;border-color:#ff3d00}.water{background:#0091ff33;border-color:#09f}.earth{background:#4caf5033;border-color:#4caf50}.air{background:#ffffff22;border-color:#fff}#target{font-size:18px;background:#222;padding:8px 18px;border-radius:18px;margin:6px}button{padding:10px 22px;border:none;border-radius:22px;background:linear-gradient(90deg,#ff6a00,#ee0979);color:#fff;font-weight:bold;cursor:pointer;margin:4px}#adBox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000e;z-index:999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}#footer{margin-top:auto;padding:12px;font-size:10px;color:#888;text-align:center}</style></head><body>
+<h1>4 ELEMENTS OF EARTH</h1><div id="brand">VAAL TO WORLD 🌍 MADE IN VAAL</div>
+<div id="stats"><span id="stage">Stage: 1/1000</span><span id="time">Time:30s</span><span id="games">Games:0</span></div>
+<div id="target">Match: 🔥 x3</div><div id="board"></div>
+<div><button onclick="useHint()">Hint (Ad)</button><button onclick="resetGame()">Reset</button></div>
+<div id="footer">VAAL TO WORLD • Free + Ad every 2 games • PayPal.me/KMphuthi</div>
+<div id="adBox"><h2>🔥 VAAL AD 🌍</h2><p style="margin:18px 0">Thanks for 2 games! Ad supports VAAL dev<br><br>[AdMob Ad Here]</p><p style="color:#0f8">You earn R5!</p><button onclick="closeAd()" style="margin-top:18px">Continue ❤️</button></div>
 <script>
-// VAAL TO WORLD - ADS EVERY 2 GAMES
-let gamesPlayed = parseInt(localStorage.getItem('vaal_games') || '0');
-let stage = parseInt(localStorage.getItem('vaal_stage') || '1');
-let timeLeft = 30;
-let timer = null;
-let targetType = 'fire';
-let targetCount = 3;
-
-const types = [
- {k:'fire', e:'🔥', c:'fire'},
- {k:'water', e:'💧', c:'water'},
- {k:'earth', e:'🌍', c:'earth'},
- {k:'air', e:'💨', c:'air'}
-];
-
-document.getElementById('games').innerText = 'Games: ' + gamesPlayed;
-document.getElementById('stage').innerText = 'Stage: ' + stage + ' / 1000';
-
-function initBoard(){
- const board = document.getElementById('board');
- board.innerHTML = '';
- for(let i=0;i<16;i++){
-   const t = types[Math.floor(Math.random()*4)];
-   const div = document.createElement('div');
-   div.className = 'cell ' + t.c;
-   div.innerText = t.e;
-   div.dataset.type = t.k;
-   div.onclick = () => toggleCell(div);
-   board.appendChild(div);
- }
- pickTarget();
- startTimer();
-}
-
-function pickTarget(){
- const t = types[Math.floor(Math.random()*4)];
- const count = Math.min(3 + Math.floor(stage/10), 6);
- targetType = t.k;
- targetCount = count;
- document.getElementById('target').innerText = `Match: ${t.e} ${t.k.toUpperCase()} x${count} | Stage ${stage}`;
-}
-
-function toggleCell(el){
- el.classList.toggle('selected');
- checkWin();
-}
-
-function checkWin(){
- const selected = document.querySelectorAll('.selected');
- const count = Array.from(selected).filter(c=>c.dataset.type===targetType).length;
- if(count >= targetCount && selected.length === targetCount){
-   stage++;
-   if(stage>1000) stage=1;
-   localStorage.setItem('vaal_stage', stage);
-   document.getElementById('stage').innerText = 'Stage: ' + stage + ' / 1000';
-   if(stage % 20 === 0){
-     alert('🌋 BOSS BEATEN! Stage '+stage+' - VAAL TO WORLD!');
-   }
-   initBoard();
- }
-}
-
-function startTimer(){
- clearInterval(timer);
- timeLeft = 30 - Math.min(Math.floor(stage/50)*2, 15);
- document.getElementById('time').innerText = 'Time: '+timeLeft+'s';
- timer = setInterval(()=>{
-   timeLeft--;
-   document.getElementById('time').innerText = 'Time: '+timeLeft+'s';
-   if(timeLeft<=0){
-     clearInterval(timer);
-     gameOver();
-   }
- },1000);
-}
-
-function gameOver(){
- gamesPlayed++;
- localStorage.setItem('vaal_games', gamesPlayed);
- document.getElementById('games').innerText = 'Games: ' + gamesPlayed;
-
- if(gamesPlayed % 2 === 0){
-   showVaalAd();
- } else {
-   alert('💀 Time up! Stage '+stage+' - Play again! ('+gamesPlayed+' games played)');
-   initBoard();
- }
-}
-
-function showVaalAd(){
- const adBox = document.getElementById('adBox');
- adBox.style.display='flex';
- console.log('VAAL AD shown - Games: '+gamesPlayed);
-}
-
-function closeAd(){
- document.getElementById('adBox').style.display='none';
- initBoard();
-}
-
-function useHint(){
- showVaalAd();
- setTimeout(()=>{
-   const cells = Array.from(document.querySelectorAll('.cell')).filter(c=>c.dataset.type===targetType);
-   if(cells[0]) cells[0].classList.add('selected');
- },500);
-}
-
-function resetGame(){
- if(confirm('Reset to Stage 1?')){
-   stage=1;
-   localStorage.setItem('vaal_stage','1');
-   document.getElementById('stage').innerText='Stage: 1 / 1000';
-   initBoard();
- }
-}
-
+let gamesPlayed=parseInt(localStorage.getItem('vaal_games')||'0');let stage=parseInt(localStorage.getItem('vaal_stage')||'1');let timeLeft=30,timer=null,targetType='fire',targetCount=3;
+const types=[{k:'fire',e:'🔥',c:'fire'},{k:'water',e:'💧',c:'water'},{k:'earth',e:'🌍',c:'earth'},{k:'air',e:'💨',c:'air'}];
+document.getElementById('games').innerText='Games: '+gamesPlayed;document.getElementById('stage').innerText='Stage: '+stage+'/1000';
+function initBoard(){const b=document.getElementById('board');b.innerHTML='';for(let i=0;i<16;i++){const t=types[Math.floor(Math.random()*4)];const d=document.createElement('div');d.className='cell '+t.c;d.innerText=t.e;d.dataset.type=t.k;d.onclick=()=>toggleCell(d);b.appendChild(d)}pickTarget();startTimer();}
+function pickTarget(){const t=types[Math.floor(Math.random()*4)];const c=Math.min(3+Math.floor(stage/10),6);targetType=t.k;targetCount=c;document.getElementById('target').innerText=`Match: ${t.e} ${t.k.toUpperCase()} x${c} | S${stage}`;}
+function toggleCell(el){el.classList.toggle('selected');checkWin();}
+function checkWin(){const sel=document.querySelectorAll('.selected');const ok=Array.from(sel).filter(x=>x.dataset.type===targetType).length;if(ok>=targetCount&&sel.length===targetCount){stage++;if(stage>1000)stage=1;localStorage.setItem('vaal_stage',stage);document.getElementById('stage').innerText='Stage: '+stage+'/1000';if(stage%20===0)alert('🌋 BOSS BEATEN S'+stage+' VAAL TO WORLD!');initBoard();}}
+function startTimer(){clearInterval(timer);timeLeft=30-Math.min(Math.floor(stage/50)*2,15);document.getElementById('time').innerText='Time: '+timeLeft+'s';timer=setInterval(()=>{timeLeft--;document.getElementById('time').innerText='Time: '+timeLeft+'s';if(timeLeft<=0){clearInterval(timer);gameOver();}},1000);}
+function gameOver(){gamesPlayed++;localStorage.setItem('vaal_games',gamesPlayed);document.getElementById('games').innerText='Games: '+gamesPlayed;if(gamesPlayed%2===0)showVaalAd();else{alert('Time up! S'+stage+' Play again! Games:'+gamesPlayed);initBoard();}}
+function showVaalAd(){document.getElementById('adBox').style.display='flex';}
+function closeAd(){document.getElementById('adBox').style.display='none';initBoard();}
+function useHint(){showVaalAd();setTimeout(()=>{const c=Array.from(document.querySelectorAll('.cell')).filter(x=>x.dataset.type===targetType);if(c[0])c[0].classList.add('selected');},400);}
+function resetGame(){if(confirm('Reset to Stage 1?')){stage=1;localStorage.setItem('vaal_stage','1');document.getElementById('stage').innerText='Stage: 1/1000';initBoard();}}
 initBoard();
-</script>
-</body>
-</html>
+</script></body></html>
