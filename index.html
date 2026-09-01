@@ -1,85 +1,92 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jewel Elements Popper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Jewel Elements Popper V5.1</title>
 <style>
-body{margin:0;background:radial-gradient(circle at center,#2a1a4a,#0d0a1a);color:white;font-family:Arial;overflow:hidden}
+body{margin:0;background:radial-gradient(circle at center,#2a1a4a,#0d0a1a);color:white;font-family:Arial;overflow-x:hidden}
 #wrap{max-width:420px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
 .top-frame{background:linear-gradient(#4a3720,#2a1f10);border:3px solid #8a6a3a;border-radius:15px;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin:8px;box-shadow:0 0 15px gold}
-.score-box{background:#111;border:2px solid #666;border-radius:8px;padding:4px 12px;text-align:center}
-.score-box b{display:block;font-size:20px;color:#ffd700}
-.combo{font-size:22px;font-weight:bold}
-.center-title{background:radial-gradient(#ffd700,#ff8c00);color:#4a2000;padding:6px 18px;border-radius:20px;font-weight:900;letter-spacing:1px;border:3px solid #8a5a00;transform:translateY(-5px);box-shadow:0 4px 10px black}
-.game-area{flex:1;background:radial-gradient(circle at top,#3a2a6a,#1a1030);margin:0 8px;border:4px solid #8a6a3a;border-radius:15px;padding:8px;position:relative}
-.chest{position:absolute;top:-18px;left:10px;font-size:34px;filter:drop-shadow(0 0 5px cyan)}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px}
-.gem{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:inset 0 0 8px white,0 3px 5px black;transition:0.15s;border:2px solid rgba(255,255,255,0.3)}
-.gem.selected{transform:scale(0.85);outline:3px solid yellow}
-.gem.fire{background:radial-gradient(circle at 30% 30%,#ffaaaa,#ff0000,#880000)}
-.gem.water{background:radial-gradient(circle at 30% 30%,#aaffff,#00aaff,#004488)}
-.gem.earth{background:radial-gradient(circle at 30% 30%,#aaffaa,#00ff00,#006600)}
-.gem.air{background:radial-gradient(circle at 30% 30%,#ffffaa,#ffcc00,#aa6600)}
-.gem.pop{animation:pop 0.4s forwards}
-@keyframes pop{50%{transform:scale(1.3) rotate(15deg)}100%{transform:scale(0)}}
-.timer{height:12px;background:#222;border-radius:10px;margin:10px 8px;overflow:hidden;border:2px solid #555}
-.timer-fill{height:100%;background:linear-gradient(90deg,#00ff88,#ffff00);width:100%;transition:width 1s linear}
+.score-box{background:#111;border:2px solid #666;border-radius:8px;padding:4px 12px;text-align:center;min-width:70px}
+.score-box b{display:block;font-size:22px;color:#ffd700}
+.center-title{background:radial-gradient(#ffd700,#ff8c00);color:#4a2000;padding:6px 18px;border-radius:20px;font-weight:900;letter-spacing:1px;border:3px solid #8a5a00;box-shadow:0 4px 10px black;text-align:center;line-height:1.1}
+.game-area{flex:1;background:radial-gradient(circle at top,#3a2a6a,#1a1030);margin:0 8px;border:4px solid #8a6a3a;border-radius:15px;padding:12px 8px;position:relative;min-height:380px}
+.chest{position:absolute;top:-12px;left:12px;font-size:38px;filter:drop-shadow(0 0 8px cyan);transition:0.5s;z-index:2}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:18px}
+.gem{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,0.8),0 3px 6px black;transition:0.15s;border:2px solid rgba(255,255,255,0.3);user-select:none}
+.gem.selected{transform:scale(0.8);outline:3px solid #ffff00;box-shadow:0 0 20px yellow}
+.gem.fire{background:radial-gradient(circle at 30% 30%,#ffcccc,#ff2222,#880000)}
+.gem.water{background:radial-gradient(circle at 30% 30%,#ccffff,#2299ff,#0033aa)}
+.gem.earth{background:radial-gradient(circle at 30% 30%,#ccffcc,#22ff22,#006600)}
+.gem.air{background:radial-gradient(circle at 30% 30%,#ffffcc,#ffdd22,#aa6600)}
+.gem.pop{animation:pop 0.35s forwards}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.4) rotate(10deg);filter:brightness(2)}100%{transform:scale(0)}}
+.timer{height:14px;background:#111;border-radius:10px;margin:10px 8px;overflow:hidden;border:2px solid #666}
+.timer-fill{height:100%;background:linear-gradient(90deg,#00ff88,#ffff00,#ff8800);width:100%;transition:width 0.5s linear}
 .bottom-nav{background:linear-gradient(#4a3720,#1a1000);border:3px solid #8a6a3a;border-radius:15px;display:flex;justify-content:space-around;padding:8px;margin:8px}
-.nav-btn{background:radial-gradient(#5a4a2a,#2a1f10);border:2px solid #8a6a3a;border-radius:10px;padding:6px 12px;font-size:20px}
-.ad{background:white;color:black;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;margin:4px 0}
-.ad button{background:#0066ff;color:white;border:none;padding:8px 20px;border-radius:20px;font-weight:bold}
+.nav-btn{background:radial-gradient(#5a4a2a,#2a1f10);border:2px solid #8a6a3a;border-radius:12px;padding:8px 14px;font-size:22px;cursor:pointer}
+.ad{background:white;color:black;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin:0;border-top:3px solid gold}
+.ad button{background:#0066ff;color:white;border:none;padding:10px 22px;border-radius:22px;font-weight:bold;font-size:14px}
 </style>
 </head>
 <body>
 <div id="wrap">
 <div class="top-frame">
 <div class="score-box">SCORE<br><b id="score">0</b></div>
-<div class="center-title">JEWEL<br>POPPER<br><small style="font-size:12px;background:#222;color:gold;padding:2px 8px;border-radius:10px">⭐ <span id="target">200</span></small></div>
+<div class="center-title">JEWEL<br>POPPER<br><span style="font-size:11px;background:#222;color:gold;padding:3px 10px;border-radius:12px;display:inline-block;margin-top:4px">⭐ <span id="target">200</span> / <span id="lvl">1</span></span></div>
 <div class="score-box">COMBO<br><b id="combo">x1</b></div>
 </div>
 
 <div class="game-area">
-<div class="chest">📦</div>
+<div class="chest" id="chest">📦</div>
 <div class="grid" id="grid"></div>
+<p id="hint" style="text-align:center;font-size:12px;color:#aaffaa;margin:6px 0 0 0">Tap 2 gems to swap — match 3!</p>
 </div>
 
 <div class="timer"><div class="timer-fill" id="timer"></div></div>
 
 <div class="bottom-nav">
-<div class="nav-btn">📖</div>
-<div class="nav-btn">🏆</div>
-<div class="nav-btn" style="background:gold;color:black">🏠<br><small>Home</small></div>
-<div class="nav-btn">🛡️</div>
-<div class="nav-btn">🎁</div>
+<div class="nav-btn" onclick="alert('📖 How to: Match 3 same elements! Fire 🔥 Water 💧 Earth 🌍 Air 💨')">📖</div>
+<div class="nav-btn" onclick="alert('🏆 Best: '+localStorage.getItem('bestJewel')+' points!')">🏆</div>
+<div class="nav-btn" style="background:gold;color:black" onclick="location.reload()">🏠<br><small style="font-size:10px">Home</small></div>
+<div class="nav-btn" onclick="alert('🛡️ Level '+level+' — Reach 200 to level up!')">🛡️</div>
+<div class="nav-btn" onclick="window.open('https://paypal.me/KMphuthi','_blank')">🎁</div>
 </div>
 
 <div class="ad">
-<div style="display:flex;align-items:center;gap:8px">
-<div style="background:black;color:#00ff88;padding:8px;border-radius:8px;font-weight:900">GO<br><small>ZA</small></div>
-<div><b>GoTyme Bank | South Africa</b><br><small>⭐ 4.6 Free</small></div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="background:black;color:#00ff88;padding:8px 10px;border-radius:8px;font-weight:900;line-height:0.9">GO<br><small style="color:white">TYME</small></div>
+<div><b>GoTyme Bank | South Africa</b><br><small>⭐ 4.6 • Made in Sebokeng Game</small></div>
 </div>
-<button onclick="window.open('https://paypal.me/KMphuthi','_blank')">INSTALL</button>
+<button onclick="window.open('https://paypal.me/KMphuthi','_blank')">OPEN</button>
 </div>
 
-<a href="https://paypal.me/KMphuthi" style="text-align:center;color:gold;display:block;padding:6px;text-decoration:none;font-size:13px">💛 Donate R10 - Support Kananelo - Sebokeng Made 💛</a>
+<a href="https://paypal.me/KMphuthi" target="_blank" style="text-align:center;color:gold;display:block;padding:10px;text-decoration:none;font-weight:bold;background:#111;margin:6px 8px;border-radius:10px;border:1px solid gold">💛 Donate R10 - Support Kananelo 💛<br><small style="color:white;font-weight:normal">Help me put this on Play Store</small></a>
 </div>
 
 <script>
 const TYPES=['fire','water','earth','air']; const EMO={fire:'🔥',water:'💧',earth:'🌍',air:'💨'};
-let grid=[], score=0, combo=1, time=25, timerInt, selected=null;
+let grid=[], score=0, combo=1, time=30, maxTime=30, level=1, selected=null, timerInt=null;
+const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+function beep(f,v=0.2){ try{ let o=audioCtx.createOscillator(); let g=audioCtx.createGain(); o.frequency.value=f; o.connect(g); g.connect(audioCtx.destination); g.gain.value=v; o.start(); g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.3); o.stop(audioCtx.currentTime+0.3);}catch(e){} }
+
 function init(){
- grid=[]; let g=document.getElementById('grid'); g.innerHTML='';
+ grid=[]; let g=document.getElementById('grid'); g.innerHTML=''; selected=null; time=maxTime; combo=1;
  for(let i=0;i<49;i++){ let t=TYPES[Math.floor(Math.random()*4)]; grid.push(t);
   let d=document.createElement('div'); d.className='gem '+t; d.innerText=EMO[t]; d.dataset.i=i; d.onclick=()=>pick(i); g.appendChild(d);
  }
- score=0; time=25; combo=1; update(); check(false); startTimer();
+ document.getElementById('chest').innerText='📦'; document.getElementById('chest').style.transform='scale(1)';
+ update(); check(false); startTimer();
 }
 function pick(i){
  let cells=document.querySelectorAll('.gem');
- if(selected===null){selected=i; cells[i].classList.add('selected');}
+ if(selected===null){selected=i; cells[i].classList.add('selected'); beep(400,0.1);}
  else{
-  if(Math.abs(selected-i)===1 || Math.abs(selected-i)===7){ swap(selected,i); time--; }
-  cells[selected].classList.remove('selected'); selected=null;
+  let a=selected, b=i; cells[a].classList.remove('selected'); selected=null;
+  if(a===b) return;
+  let valid = Math.abs(a-b)===1 && Math.floor(a/7)===Math.floor(b/7) || Math.abs(a-b)===7;
+  if(valid){ swap(a,b); } else { beep(150,0.15); }
  }
 }
 function swap(a,b){
@@ -87,6 +94,7 @@ function swap(a,b){
  let cells=document.querySelectorAll('.gem');
  cells[a].className='gem '+grid[a]; cells[a].innerText=EMO[grid[a]];
  cells[b].className='gem '+grid[b]; cells[b].innerText=EMO[grid[b]];
+ beep(600,0.12);
  setTimeout(()=>check(true),150);
 }
 function check(anim){
@@ -94,23 +102,35 @@ function check(anim){
  for(let r=0;r<7;r++) for(let c=0;c<5;c++){ let i=r*7+c; if(grid[i]&&grid[i]===grid[i+1]&&grid[i]===grid[i+2]){toRemove.add(i);toRemove.add(i+1);toRemove.add(i+2);} }
  for(let c=0;c<7;c++) for(let r=0;r<5;r++){ let i=r*7+c; if(grid[i]&&grid[i]===grid[i+7]&&grid[i]===grid[i+14]){toRemove.add(i);toRemove.add(i+7);toRemove.add(i+14);} }
  if(toRemove.size>0){
-  score+=toRemove.size*10*combo; combo++; if(anim){toRemove.forEach(i=>document.querySelectorAll('.gem')[i].classList.add('pop'));}
+  let pts=toRemove.size*10*combo; score+=pts; beep(800+combo*100,0.25);
+  if(combo>1) document.getElementById('hint').innerText=`🔥 COMBO x${combo}! +${pts}!`;
+  if(anim){toRemove.forEach(i=>document.querySelectorAll('.gem')[i].classList.add('pop'));}
   setTimeout(()=>{
    toRemove.forEach(i=>grid[i]=null);
    for(let c=0;c<7;c++){ let col=[]; for(let r=6;r>=0;r--){ let i=r*7+c; if(grid[i]) col.push(grid[i]); } for(let r=6;r>=0;r--){ let i=r*7+c; grid[i]=col[6-r]||TYPES[Math.floor(Math.random()*4)]; } }
    document.querySelectorAll('.gem').forEach((el,i)=>{el.className='gem '+grid[i]; el.innerText=EMO[grid[i]];});
-   update(); if(score>=200){ alert('YOU POPPED 200! LEVEL UP!'); clearInterval(timerInt); init(); } else check(true);
+   combo++; update();
+   if(score>=200){
+    document.getElementById('chest').innerText='💎'; document.getElementById('chest').style.transform='scale(1.5)';
+    beep(1200,0.4); clearInterval(timerInt);
+    setTimeout(()=>{
+      let best=parseInt(localStorage.getItem('bestJewel')||0); if(score>best) localStorage.setItem('bestJewel',score);
+      alert(`LEVEL ${level} CLEARED! 🎉💎\nScore: ${score}\nOpening chest!`); level++; maxTime=Math.max(15,maxTime-2); init();
+    },600);
+   } else check(true);
   }, anim?350:0);
- } else { combo=1; update(); }
+ } else { if(combo>1){ combo=1; document.getElementById('hint').innerText='Tap 2 gems to swap — match 3!'; update(); } }
 }
 function update(){
  document.getElementById('score').innerText=score;
  document.getElementById('combo').innerText='x'+combo;
- document.getElementById('timer').style.width=(time/25*100)+'%';
- if(time<8) document.getElementById('timer').style.background='linear-gradient(90deg,red,yellow)';
+ document.getElementById('lvl').innerText=level;
+ document.getElementById('target').innerText=200;
+ document.getElementById('timer').style.width=(time/maxTime*100)+'%';
+ document.getElementById('timer').style.background=time<10?'linear-gradient(90deg,red,orange)':time<15?'linear-gradient(90deg,orange,yellow)':'linear-gradient(90deg,#00ff88,#ffff00)';
 }
 function startTimer(){
- clearInterval(timerInt); timerInt=setInterval(()=>{ time--; update(); if(time<=0){ clearInterval(timerInt); alert('Time up! Score '+score+' Donate to continue?'); } },1000);
+ clearInterval(timerInt); timerInt=setInterval(()=>{ time--; update(); if(time<=0){ clearInterval(timerInt); beep(100,0.5); let best=parseInt(localStorage.getItem('bestJewel')||0); if(score>best) localStorage.setItem('bestJewel',score); alert('⏰ Time Up! Score '+score+'\nBest: '+Math.max(best,score)+'\nTap Home to retry 💛'); } },1000);
 }
 init();
 </script>
