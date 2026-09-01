@@ -1,21 +1,18 @@
-// VAAL TO WORLD - ADS EVERY 2 GAMES
-let gamesPlayed = localStorage.getItem('vaal_games') || 0;
-gamesPlayed = parseInt(gamesPlayed);
+// VAAL TO WORLD - ADS EVERY 2 GAMES - FIXED
+let gamesPlayed = parseInt(localStorage.getItem('vaal_games') || '0');
 
 function gameOver() {
   gamesPlayed++;
   localStorage.setItem('vaal_games', gamesPlayed);
+  console.log("Games played: " + gamesPlayed);
 
   if (gamesPlayed % 2 === 0) {
-    // SHOW AD EVERY 2 GAMES
     showVaalAd();
   }
+  // your old gameOver code here
 }
 
 function showVaalAd() {
-  // If you have AdMob ID, ad shows here
-  alert("🔥 VAAL AD — Support Vaal Dev! 🌍\n\n[Your Ad Will Show Here]\n\nThanks for supporting VAAL TO WORLD!");
-  
-  // For real AdMob, replace with:
-  // admob.interstitial.show();
+  // PLACEHOLDER until AdMob ID
+  alert("🔥 VAAL AD - Support Vaal Dev! 🌍\n\nAd coming after 2 games - Thanks for playing VAAL TO WORLD!");
 }
