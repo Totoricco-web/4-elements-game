@@ -1,43 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4 Elements - Chappies Battle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 Elements Battle</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;text-align:center;padding:20px}
-h1{color:#facc15}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:400px;margin:20px auto}
-.card{background:#1e293b;border-radius:16px;padding:20px;font-size:40px;cursor:pointer;border:3px solid transparent}
-.card:hover{border-color:#facc15}
-#result{font-size:22px;margin:20px;font-weight:bold;min-height:30px}
-.paypal{margin-top:30px;background:#ffc439;color:#000;padding:12px 20px;border-radius:10px;display:inline-block;text-decoration:none;font-weight:bold}
+body{background:#111;color:white;font-family:Arial;text-align:center;padding:20px}
+button{padding:15px 25px;margin:10px;font-size:18px;border-radius:10px;border:none;cursor:pointer}
+.fire{background:#ff4444} .water{background:#4444ff;color:white} .earth{background:#44ff44} .air{background:#ffff44}
+#donate{background:#ffcc00;color:black;font-weight:bold;display:block;margin:20px auto;padding:15px 30px;text-decoration:none;border-radius:10px}
 </style>
 </head>
 <body>
-<h1>🌍 4 ELEMENTS BATTLE</h1>
-<p>Chappies Wrapper vs Fire 🔥 Water 💧 Earth 🌍 Air 🌬️</p>
-<div id="score">You: 0 | Chappies: 0</div>
-<div id="result">Choose your element!</div>
-<div class="grid">
-<div class="card" onclick="play('fire')">🔥<span>FIRE</span></div>
-<div class="card" onclick="play('water')">💧<span>WATER</span></div>
-<div class="card" onclick="play('earth')">🌍<span>EARTH</span></div>
-<div class="card" onclick="play('air')">🌬️<span>AIR</span></div>
-</div>
-<a class="paypal" href="https://www.paypal.com/donate/?hosted_button_id=YOUR_ID" target="_blank">💛 Donate via PayPal</a>
+<h1>🔥💧🌍💨 4 ELEMENTS BATTLE</h1>
+<h2 id="score">You: 0 | Chappies: 0</h2>
+<h2 id="result">Choose your element!</h2>
+<button class="fire" onclick="play('fire')">🔥 FIRE</button>
+<button class="water" onclick="play('water')">💧 WATER</button>
+<button class="earth" onclick="play('earth')">🌍 EARTH</button>
+<button class="air" onclick="play('air')">💨 AIR</button>
+
+<a id="donate" href="https://paypal.me/KMphuthi" target="_blank">💛 Donate via PayPal - Support Kananelo 💛</a>
+<p>Built by Kananelo in Sebokeng - Vereeniging, Gauteng</p>
+
 <script>
-let you=0, comp=0;
-const beats={fire:'air',air:'earth',earth:'water',water:'fire'};
-function play(user){
- const elems=['fire','water','earth','air'];
- const compChoice=elems[Math.floor(Math.random()*4)];
- let msg=`You: ${user} vs Chappies: ${compChoice}<br>`;
- if(user===compChoice)msg+='🤝 TIE!';
- else if(beats[user]===compChoice){msg+='🔥 YOU WIN!';you++;}
- else{msg+='😭 CHAPPIES WINS!';comp++;}
- document.getElementById('result').innerHTML=msg;
- document.getElementById('score').innerText=`You: ${you} | Chappies: ${comp}`;
+let you=0,chappies=0;
+function play(p){
+let e=['fire','water','earth','air'];
+let c=e[Math.floor(Math.random()*4)];
+let r='';
+if(p===c) r=`Draw! Both chose ${p}`;
+else if((p==='fire'&&c==='earth')||(p==='water'&&c==='fire')||(p==='earth'&&c==='air')||(p==='air'&&c==='water')){r=`You WIN! ${p} beats ${c}`;you++}
+else{r=`You LOSE! ${c} beats ${p}`;chappies++}
+document.getElementById('result').innerText=r+` (Chappies chose ${c})`;
+document.getElementById('score').innerText=`You: ${you} | Chappies: ${chappies}`;
 }
 </script>
 </body>
